@@ -1,0 +1,126 @@
+﻿@using System.Data
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style type="text/css">
+   .table-responsive{
+        max-height: 207px;
+        overflow: auto;
+   }
+</style>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+@ViewBag.method1
+<br />
+@ViewBag.method2
+<br />
+@ViewBag.method3
+
+@if (ViewBag.Data != null)
+{
+    DataSet ds = ViewBag.Data;
+
+    if (ds != null && ds.Tables.Count > 0)
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped compact table-hover nowrap mb-0" width="100%">
+                <thead>
+                    <tr class="table-primary">
+                        @foreach (DataColumn col in ds.Tables[0].Columns)
+                        {
+                            <th>@col.ColumnName</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        <tr>
+                            @foreach (DataColumn col in ds.Tables[0].Columns)
+                            {
+                                <td>@row[col.ColumnName]</td>
+                            }
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+}
+
+<hr />
+
+@if (ViewBag.Movies != null)
+{
+    DataSet ds = ViewBag.Movies;
+
+    if (ds != null && ds.Tables.Count > 0)
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped compact table-hover nowrap mb-0" width="100%">
+                <thead>
+                    <tr class="table-success">
+                        @foreach (DataColumn col in ds.Tables[0].Columns)
+                        {
+                            <th>@col.ColumnName</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        <tr>
+                            @foreach (DataColumn col in ds.Tables[0].Columns)
+                            {
+                                <td>@row[col.ColumnName]</td>
+                            }
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+}
+
+<hr />
+
+@if (ViewBag.State != null)
+{
+
+    DataSet ds = ViewBag.State;
+
+    if (ds != null && ds.Tables.Count > 0)
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped compact table-hover nowrap mb-0" width="100%">
+                <thead>
+                    <tr class="table-danger">
+                        @foreach (DataColumn col in ds.Tables[0].Columns)
+                        {
+                            <th>@col.ColumnName</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        <tr>
+                            @foreach (DataColumn col in ds.Tables[0].Columns)
+                            {
+                                <td>@row[col.ColumnName]</td>
+                            }
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+}
