@@ -7,10 +7,12 @@ using System.Data;
 
 namespace ACILogin.Services
 {
-    public class DataService : IDataService
+    public sealed class DataService : IDataService
     {
         private readonly IDefaultConnection _defaultConnection;
         private readonly IDefaultConnection2 _defaultConnection2;
+
+        private DataService() { }
 
         public DataService(IOptions<DataConnection> options)
         {

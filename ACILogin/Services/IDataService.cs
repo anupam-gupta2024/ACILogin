@@ -8,6 +8,8 @@ namespace ACILogin.Services
     {
         DataSet GetBasicData(IGetBasicDataParam getBasicDataParam);
 
-        DataSet Movies(IMoviesParam movies);        
+        DataSet Movies(IMoviesParam movies);
+
+        //delegate DataSet MoviesAsync(IMoviesParam movies);
     }
 }

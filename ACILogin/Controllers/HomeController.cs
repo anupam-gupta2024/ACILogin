@@ -8,27 +8,30 @@ using Utility;
 
 namespace ACILogin.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : baseController
     {
-
-        //private readonly IBusinessAccess _layer;
-        private readonly IDataService _layer;
-        private readonly ILog _ILog;
-        //private ConcurrentDictionary<string, object> _SqlParameter;
-
-        private readonly IMoviesParam _MoviesParam;
-        private readonly IGetBasicDataParam _GetBasicDataParam;
-
-
-        // Dependency Injection - we inject IBusinessAccess
-        public HomeController(IDataService layer)
+        public HomeController(IDataService layer) : base(layer)
         {
-            _layer = layer;             
-            _ILog = Log.getInstance;
-            //_SqlParameter = new ConcurrentDictionary<string, object>();
-            _MoviesParam = new MoviesParam();
-            _GetBasicDataParam = new GetBasicDataParam();
         }
+
+        ////private readonly IBusinessAccess _layer;
+        //private readonly IDataService _layer;
+        //private readonly ILog _ILog;
+        ////private ConcurrentDictionary<string, object> _SqlParameter;
+
+        //private readonly IMoviesParam _MoviesParam;
+        //private readonly IGetBasicDataParam _GetBasicDataParam;
+
+
+        //// Dependency Injection - we inject IBusinessAccess
+        //public HomeController(IDataService layer)
+        //{
+        //    _layer = layer;             
+        //    _ILog = Log.getInstance;
+        //    //_SqlParameter = new ConcurrentDictionary<string, object>();
+        //    _MoviesParam = new MoviesParam();
+        //    _GetBasicDataParam = new GetBasicDataParam();
+        //}
 
         public IActionResult Index()
         {
@@ -43,7 +46,8 @@ namespace ACILogin.Controllers
             //_SqlParameter.AddOrUpdate("Action", 2, (key, oldValue) => 2);
             _MoviesParam.Action = 2;
             _MoviesParam.DataTable = dt;
-            ViewBag.Data = _layer.Movies(_MoviesParam);
+            ViewBag.Data =  _layer.Movies(_MoviesParam);
+
 
             _MoviesParam.Action = 3;
             ViewBag.Movies = _layer.Movies(_MoviesParam);
@@ -53,19 +57,7 @@ namespace ACILogin.Controllers
             _GetBasicDataParam.R1 = "29";
             ViewBag.State = _layer.GetBasicData(_GetBasicDataParam);
 
-           
-            //ViewBag.State = _layer.getState();
             return View();
-        }        
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            ErrorViewModel model = new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier };
-            _ILog.LogException(model.RequestId + Environment.NewLine + model.ShowRequestId);
-
-            return View(model);
-            //return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
