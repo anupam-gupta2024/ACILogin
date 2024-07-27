@@ -4,6 +4,7 @@ using ACILogin.Services.StoredProcedure.GetSet;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Xml.Linq;
 using Utility;
 
 namespace ACILogin.Controllers
@@ -30,6 +31,7 @@ namespace ACILogin.Controllers
         public IActionResult Error()
         {
             var execeptionHandlerPathFeture = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+
             ErrorViewModel model = new ErrorViewModel
             {
                 RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
@@ -40,26 +42,11 @@ namespace ACILogin.Controllers
                 InnerException = Convert.ToString(execeptionHandlerPathFeture.Error.InnerException)
             };
 
-            _ILog.LogException(
-                String.Format(Environment.NewLine +
-                    "Request ID: {1}{0}" +
-                    "Error Message: {2}{0}" +
-                    "Source: {3}{0}" +
-                    "ErrorPath: {4}{0}" +
-                    "InnerException: {5}{0}" +
-                    "StackTrace: {6}",
-                    Environment.NewLine + Environment.NewLine,    // 0
-                    model.RequestId,    // 1
-                    model.ErrorMessage, // 2
-                    model.Source,   // 3
-                    model.ErrorPath,    // 4
-                    model.InnerException,   // 5
-                    model.StackTrace    // 6
-                ));
+            _ILog.LogException(model.ToString());
 
 
             return View(model);
-           
+
             //ErrorViewModel model = new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier };
             //_ILog.LogException(model.RequestId + Environment.NewLine 
             //    + model.ShowRequestId + Environment.NewLine
@@ -67,6 +54,6 @@ namespace ACILogin.Controllers
 
             //return View(model);
             //return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        }        
     }
 }

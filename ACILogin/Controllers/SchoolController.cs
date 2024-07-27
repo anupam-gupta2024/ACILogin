@@ -1,5 +1,6 @@
 ﻿using ACILogin.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace ACILogin.Controllers
 {
@@ -13,7 +14,6 @@ namespace ACILogin.Controllers
         {
             _MoviesParam.Action = 1;
             ViewBag.Data = _layer.Movies(_MoviesParam);
-
 
             return View();
         }

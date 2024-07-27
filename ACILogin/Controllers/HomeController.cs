@@ -10,8 +10,10 @@ namespace ACILogin.Controllers
 {
     public class HomeController : baseController
     {
-        public HomeController(IDataService layer) : base(layer)
+        private readonly IConfiguration _config;
+        public HomeController(IDataService layer, IConfiguration config) : base(layer)
         {
+            _config = config;
         }
 
         ////private readonly IBusinessAccess _layer;
@@ -46,7 +48,7 @@ namespace ACILogin.Controllers
             //_SqlParameter.AddOrUpdate("Action", 2, (key, oldValue) => 2);
             _MoviesParam.Action = 2;
             _MoviesParam.DataTable = dt;
-            ViewBag.Data =  _layer.Movies(_MoviesParam);
+            ViewBag.Data = _layer.Movies(_MoviesParam);
 
 
             _MoviesParam.Action = 3;
@@ -56,6 +58,10 @@ namespace ACILogin.Controllers
             _GetBasicDataParam.Action = 4;
             _GetBasicDataParam.R1 = "29";
             ViewBag.State = _layer.GetBasicData(_GetBasicDataParam);
+
+            ViewBag.method1 = "Hello".ToString();
+
+            ViewBag.Environment = _config.GetSection("DataConnection").GetChildren().ToDictionary(a => a.Key, a => a.Value);
 
             return View();
         }

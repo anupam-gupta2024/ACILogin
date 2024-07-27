@@ -4,10 +4,10 @@
 }
 
 <style type="text/css">
-   .table-responsive{
+    .table-responsive {
         max-height: 207px;
         overflow: auto;
-   }
+    }
 </style>
 
 <div class="text-center">
@@ -20,6 +20,22 @@
 @ViewBag.method2
 <br />
 @ViewBag.method3
+<br />
+@if (ViewBag.Environment != null)
+{
+    foreach (var d in (Dictionary<string, string>)ViewBag.Environment)
+    {
+        <p>@d.Key : @d.Value</p>
+    }
+}
+
+<environment include="Staging,Production">
+    <p>This include Staging &amp; Production Environment</p>
+</environment>
+
+<environment exclude="Production">
+    <p>This exclude Production Environment</p>
+</environment>
 
 @if (ViewBag.Data != null)
 {

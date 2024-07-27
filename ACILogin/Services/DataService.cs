@@ -27,9 +27,10 @@ namespace ACILogin.Services
             return _defaultConnection2.GetBasicData(getBasicDataParam);
         }
 
-        DataSet IDataService.Movies(IMoviesParam moviesParam)
+        public DataSet Movies(IMoviesParam moviesParam)
         {
             return _defaultConnection.Movies(moviesParam);
         }
+        
     }
 }

@@ -15,7 +15,7 @@ namespace ACILogin.Controllers
         //public Home1Controller(ILogger<Home1Controller> logger)
         //{
         //    _logger = logger;
-        //}        
+        //}       
 
         private readonly IBusinessLayer _layer;
         private readonly ILog _ILog;
@@ -23,7 +23,7 @@ namespace ACILogin.Controllers
 
         // Dependency Injection - we inject IBusinessLayer
         public Home1Controller(IBusinessLayer layer)
-        {
+        {           
             _layer = layer;             
             _ILog = Log.getInstance;
             _SqlParameter = new ConcurrentDictionary<string, object>();
@@ -46,7 +46,6 @@ namespace ACILogin.Controllers
 
             _SqlParameter.AddOrUpdate("Action", 2, (key, oldValue) => 2);
             ViewBag.State = _layer.getMovies(_SqlParameter);
-
 
             //ViewBag.State = _layer.getState();
             return View();

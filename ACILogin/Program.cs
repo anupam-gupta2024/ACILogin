@@ -2,6 +2,11 @@ using ACILogin.Models;
 using ACILogin.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+//var builder = WebApplication.CreateBuilder(
+//    new WebApplicationOptions()
+//    {
+//        EnvironmentName = Microsoft.Extensions.Hosting.Environments.Staging  // set Environment Variable for Development, Staging and Production Environments
+//    });
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -13,7 +18,7 @@ builder.Services.Configure<DataConnection>(builder.Configuration.GetSection("Dat
 //builder.Services.AddScoped<IBusinessLayer, DataLayer>();
 //builder.Services.AddTransient<IBusinessAccess, DataAccess>();
 
-builder.Services.AddTransient<IDataService, DataService>();
+builder.Services.AddScoped<IDataService, DataService>();
 //builder.Services.AddTransient<IDefaultConnection, DefaultConnection>();
 
 
